@@ -1,0 +1,16 @@
+{
+    "region" : "eu-west-2",
+    "profile" : "serverless",
+    "configuration" : "Release",
+    "framework"     : "netcoreapp3.1",
+    "function-name" : "tasks-api",
+    "package-type"  : "Zip",
+    "function-handler" : "AwsDotnetCsharp::AwsDotnetCsharp.Handler::Hello",
+    "function-memory-size" : 256,
+    "function-role"        : "arn:aws:iam::332371528355:role/yrtt-tasks-backend-api-dev-eu-west-2-lambdaRole",
+    "function-timeout"     : 10,
+    "function-runtime"     : "dotnetcore3.1",
+    "tracing-mode"         : "PassThrough",
+    "environment-variables" : "",
+    "image-tag"             : ""
+}

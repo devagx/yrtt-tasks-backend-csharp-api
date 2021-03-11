@@ -1,0 +1,36 @@
+service: yrtt-tasks-backend-csharp-api
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: dotnetcore3.1
+  lambdaHashingVersion: 20201221
+  region: eu-west-2
+  profile: serverless
+  environment:
+    DB_HOST: ${file(./config.dev.json):DB_HOST}
+    DB_PORT: ${file(./config.dev.json):DB_PORT}
+    DB_NAME: ${file(./config.dev.json):DB_NAME}
+    DB_USER: ${file(./config.dev.json):DB_USER}
+    DB_PASSWORD: ${file(./config.dev.json):DB_PASSWORD}
+
+package:
+  individually: true
+
+functions:
+  get-tasks:
+    handler: CsharpHandlers::AwsDotnetCsharp.TaskHandler::GetTasks
+    package:
+      artifact: bin/Release/netcoreapp3.1/tasks-api.zip
+    events:
+      - httpApi:
+          path: /users/{userId}/tasks
+          method: get
+  save-task:
+    handler: CsharpHandlers::AwsDotnetCsharp.TaskHandler::SaveTask
+    package:
+      artifact: bin/Release/netcoreapp3.1/tasks-api.zip
+    events:
+      - httpApi:
+          path: /users/{userId}/tasks
+          method: post
